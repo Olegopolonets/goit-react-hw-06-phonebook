@@ -4,19 +4,6 @@ import { Filter } from './Filter/Filter.jsx';
 import { Section } from './Section/Section.jsx';
 
 export const App = () => {
-  // const newContactState = newContact => {
-  //   setContacts(prevState => [...prevState, newContact]);
-  // };
-
-  // const getFilteredData = () => {
-  //   if (filter) {
-  //     return contacts.filter(contact =>
-  //       contact.name.toLowerCase().includes(filter.toLowerCase())
-  //     );
-  //   }
-  //   return contacts;
-  // };
-
   return (
     <div
       style={{
