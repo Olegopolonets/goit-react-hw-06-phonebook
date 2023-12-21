@@ -1,15 +1,17 @@
 import React from 'react';
 import { ListItem } from '../ListItem/ListItem.jsx';
 import s from './ContactList.module.css';
+import { useSelector } from 'react-redux';
 
-export const ContactList = ({
-  contacts,
-  getFilteredData,
-  children,
-  deleteContact,
-}) => {
-  const filteredContacts = getFilteredData(contacts);
+export const ContactList = ({ children }) => {
+  const contacts = useSelector(state => state.phonebook.contacts);
+  const filter = useSelector(state => state.phonebook.filter);
+  const filteredContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter?.toLowerCase() || '')
+  );
+  console.log('filter: ', filter);
 
+  console.log(contacts);
   return (
     <>
       {children}
@@ -18,13 +20,7 @@ export const ContactList = ({
       ) : (
         <ul className={s.contactList}>
           {filteredContacts.map(({ id, name, number }) => (
-            <ListItem
-              key={id}
-              id={id}
-              name={name}
-              number={number}
-              deleteContact={deleteContact}
-            />
+            <ListItem key={id} id={id} name={name} number={number} />
           ))}
         </ul>
       )}
