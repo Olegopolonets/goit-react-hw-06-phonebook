@@ -4,20 +4,19 @@ import { addContact } from '../../store/phonebookSlice.js';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(state => state.phonebook.contacts);
 
   const createContact = event => {
     event.preventDefault();
     const name = event.target.elements.name.value;
-
     const number = event.target.elements.number.value;
-
-    if (contacts?.some(contact => contact.name === name)) {
+    if (contacts.some(contact => contact.name === name)) {
       alert(`Contact with the name ${name} already exists!`);
       return;
     }
 
     dispatch(addContact({ name, number }));
+    event.target.reset();
   };
 
   return (
